@@ -22,50 +22,33 @@ const SectionTitle = styled.h2`
   }
 `;
 
+// This is the key change - using native scrolling instead of transform
 const EventsContainer = styled.div`
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 20px 0;
-  cursor: grab;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
   
-  &:active {
-    cursor: grabbing;
+  /* Hide scrollbar for Chrome/Safari/Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Add padding to allow seeing the first and last cards fully */
+  &::before,
+  &::after {
+    content: '';
+    padding-left: 20px;
   }
 `;
 
 const EventsWrapper = styled.div`
   display: flex;
-  transition: transform 0.5s ease;
   gap: 20px;
-  scroll-behavior: smooth;
-`;
-
-const ScrollIndicator = styled.div`
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.9rem;
-  color: #888;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  opacity: 0.7;
-  
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const ScrollIcon = styled.div`
-  display: inline-block;
-  animation: scrollHint 2s infinite;
-  
-  @keyframes scrollHint {
-    0% { transform: translateX(-3px); }
-    50% { transform: translateX(3px); }
-    100% { transform: translateX(-3px); }
-  }
+  padding: 0 10px;
 `;
 
 const EventCard = styled.div`
@@ -237,37 +220,16 @@ const NavigationButton = styled.button`
   }
 `;
 
-const Indicator = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-`;
-
-const IndicatorDot = styled.div`
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: ${props => props.active ? 'var(--primary-color)' : '#ddd'};
-  transition: all 0.3s ease;
-  cursor: pointer;
-  
-  &:hover {
-    transform: scale(1.2);
-  }
+const ScrollIndicator = styled.div`
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 10px;
+  opacity: 0.7;
 `;
 
 export function UpcomingEvents() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [maxScroll, setMaxScroll] = useState(0);
-  const [visibleIndex, setVisibleIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollX, setScrollX] = useState(0);
-  
   const containerRef = useRef(null);
-  const wrapperRef = useRef(null);
-  
   // Countdown states
   const [countdowns, setCountdowns] = useState({});
   
@@ -310,50 +272,6 @@ export function UpcomingEvents() {
     }
   ];
   
-  // Calculate the visible cards based on container width
-  useEffect(() => {
-    if (containerRef.current && wrapperRef.current) {
-      const calculateVisibleCards = () => {
-        const containerWidth = containerRef.current.offsetWidth;
-        const cardWidth = 320; // Card width + gap
-        const visibleCards = Math.floor(containerWidth / cardWidth);
-        const newMaxScroll = Math.max(0, events.length - visibleCards);
-        setMaxScroll(newMaxScroll);
-      };
-      
-      calculateVisibleCards();
-      window.addEventListener('resize', calculateVisibleCards);
-      
-      return () => {
-        window.removeEventListener('resize', calculateVisibleCards);
-      };
-    }
-  }, [events.length]);
-  
-  // Handle wheel events for horizontal scrolling
-  useEffect(() => {
-    const handleWheel = (e) => {
-      if (containerRef.current && e.deltaY !== 0) {
-        e.preventDefault();
-        const direction = e.deltaY > 0 ? 1 : -1;
-        const newPosition = Math.min(Math.max(0, scrollPosition + direction), maxScroll);
-        setScrollPosition(newPosition);
-        setVisibleIndex(newPosition);
-      }
-    };
-    
-    const currentContainer = containerRef.current;
-    if (currentContainer) {
-      currentContainer.addEventListener('wheel', handleWheel, { passive: false });
-    }
-    
-    return () => {
-      if (currentContainer) {
-        currentContainer.removeEventListener('wheel', handleWheel);
-      }
-    };
-  }, [scrollPosition, maxScroll]);
-  
   // Update countdowns every second
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -384,89 +302,17 @@ export function UpcomingEvents() {
     return () => clearInterval(timer);
   }, [events]);
   
-  // Mouse/Touch Events for dragging
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - containerRef.current.offsetLeft);
-    setScrollX(scrollPosition * 320);
-  };
-  
-  const handleTouchStart = (e) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX - containerRef.current.offsetLeft);
-    setScrollX(scrollPosition * 320);
-  };
-  
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    
-    const x = e.pageX - containerRef.current.offsetLeft;
-    const walk = (x - startX); // Scroll speed
-    const newScrollX = scrollX - walk;
-    const newPosition = Math.round(newScrollX / 320);
-    
-    if (newPosition >= 0 && newPosition <= maxScroll) {
-      wrapperRef.current.style.transform = `translateX(-${newScrollX}px)`;
-    }
-  };
-  
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-    
-    const x = e.touches[0].pageX - containerRef.current.offsetLeft;
-    const walk = (x - startX); // Scroll speed
-    const newScrollX = scrollX - walk;
-    const newPosition = Math.round(newScrollX / 320);
-    
-    if (newPosition >= 0 && newPosition <= maxScroll) {
-      wrapperRef.current.style.transform = `translateX(-${newScrollX}px)`;
-    }
-  };
-  
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    
-    if (!isDragging) return;
-    
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const wrapperRect = wrapperRef.current.getBoundingClientRect();
-    const offset = wrapperRect.left - containerRect.left;
-    
-    // Calculate the nearest card position
-    const newPosition = Math.min(
-      Math.max(0, Math.round(-offset / 320)),
-      maxScroll
-    );
-    
-    setScrollPosition(newPosition);
-    setVisibleIndex(newPosition);
-    wrapperRef.current.style.transform = `translateX(-${newPosition * 320}px)`;
-  };
-  
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      handleMouseUp();
-    }
-  };
-  
+  // Scroll to next or previous card
   const handleNext = () => {
-    if (scrollPosition < maxScroll) {
-      setScrollPosition(scrollPosition + 1);
-      setVisibleIndex(scrollPosition + 1);
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
     }
   };
   
   const handlePrev = () => {
-    if (scrollPosition > 0) {
-      setScrollPosition(scrollPosition - 1);
-      setVisibleIndex(scrollPosition - 1);
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
     }
-  };
-  
-  const goToIndex = (index) => {
-    setScrollPosition(index);
-    setVisibleIndex(index);
   };
   
   // Format date as "Month Day" (e.g., "Apr 16")
@@ -481,29 +327,16 @@ export function UpcomingEvents() {
     <EventsSection>
       <SectionTitle>Special Moments Ahead</SectionTitle>
       
-      <EventsContainer 
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleMouseUp}
+      <NavigationButton 
+        className="prev" 
+        onClick={handlePrev}
+        aria-label="Previous events"
       >
-        <NavigationButton 
-          className="prev" 
-          onClick={handlePrev} 
-          disabled={scrollPosition === 0}
-          aria-label="Previous events"
-        >
-          <CustomLeftArrow size={20} />
-        </NavigationButton>
-        
-        <EventsWrapper 
-          ref={wrapperRef}
-          style={{ transform: `translateX(-${scrollPosition * 320}px)` }}
-        >
+        <CustomLeftArrow size={20} />
+      </NavigationButton>
+      
+      <EventsContainer ref={containerRef}>
+        <EventsWrapper>
           {events.map((event) => {
             const formattedDate = formatDate(event.date);
             const countdown = countdowns[event.id] || { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -542,30 +375,19 @@ export function UpcomingEvents() {
             );
           })}
         </EventsWrapper>
-        
-        <NavigationButton 
-          className="next" 
-          onClick={handleNext} 
-          disabled={scrollPosition >= maxScroll}
-          aria-label="Next events"
-        >
-          <CustomRightArrow size={20} />
-        </NavigationButton>
-        
-        <ScrollIndicator>
-          <ScrollIcon>↔️</ScrollIcon> Scroll or swipe to see more events
-        </ScrollIndicator>
       </EventsContainer>
       
-      <Indicator>
-        {Array.from({ length: maxScroll + 1 }).map((_, index) => (
-          <IndicatorDot 
-            key={index} 
-            active={index === visibleIndex} 
-            onClick={() => goToIndex(index)}
-          />
-        ))}
-      </Indicator>
+      <NavigationButton 
+        className="next" 
+        onClick={handleNext}
+        aria-label="Next events"
+      >
+        <CustomRightArrow size={20} />
+      </NavigationButton>
+      
+      <ScrollIndicator>
+        ↔️ Swipe or scroll to see more events
+      </ScrollIndicator>
     </EventsSection>
   );
 }
