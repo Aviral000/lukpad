@@ -25,6 +25,7 @@ const AboutUsContainer = styled.div`
   gap: 40px;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const Person = styled.div`
@@ -34,6 +35,8 @@ const Person = styled.div`
   transform: translateY(50px);
   opacity: 0;
   transition: all 0.3s ease-in-out;
+  position: relative;
+  z-index: 2;
   
   &.visible {
     transform: translateY(0);
@@ -73,7 +76,8 @@ const PersonDesc = styled.p`
   line-height: 1.6;
 `;
 
-const HeartConnector = styled.div`
+// Connection elements
+const ConnectionContainer = styled.div`
   position: relative;
   width: 100px;
   height: 100px;
@@ -83,6 +87,7 @@ const HeartConnector = styled.div`
   transform: translateY(50px);
   opacity: 0;
   transition: all 0.3s ease-in-out;
+  z-index: 1;
   
   &.visible {
     transform: translateY(0);
@@ -90,10 +95,69 @@ const HeartConnector = styled.div`
   }
 `;
 
+const RedString = styled.div`
+  position: absolute;
+  width: 200%;
+  height: 3px;
+  background-color: #e74c3c; /* Red string color */
+  top: 50%;
+  left: -50%;
+  z-index: 1;
+  
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+  }
+  
+  &::before {
+    left: 0;
+    top: -1.5px;
+  }
+  
+  &::after {
+    right: 0;
+    top: -1.5px;
+  }
+`;
+
+// String decorations
+const StringKnot = styled.div`
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #e74c3c;
+  border-radius: 50%;
+  
+  &.left {
+    left: -100px;
+    top: -7px;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(45deg);
+  }
+  
+  &.right {
+    right: -100px;
+    top: -7px;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    transform: rotate(-45deg);
+  }
+`;
+
 const HeartIcon = styled.div`
   font-size: 4rem;
   color: var(--primary-color);
   animation: pulse 1.5s infinite;
+  position: relative;
+  z-index: 3;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 0 10px;
   
   @keyframes pulse {
     0% { transform: scale(1); }
@@ -102,10 +166,26 @@ const HeartIcon = styled.div`
   }
 `;
 
+// Small heart decorations on the string
+const StringHeart = styled.div`
+  position: absolute;
+  font-size: 1rem;
+  color: #e74c3c;
+  top: -10px;
+  
+  &.left {
+    left: -70px;
+  }
+  
+  &.right {
+    right: -70px;
+  }
+`;
+
 export function AboutUs() {
   const personRef1 = useRef(null);
   const personRef2 = useRef(null);
-  const heartRef = useRef(null);
+  const connectionRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -121,12 +201,12 @@ export function AboutUs() {
 
     if (personRef1.current) observer.observe(personRef1.current);
     if (personRef2.current) observer.observe(personRef2.current);
-    if (heartRef.current) observer.observe(heartRef.current);
+    if (connectionRef.current) observer.observe(connectionRef.current);
 
     return () => {
       if (personRef1.current) observer.unobserve(personRef1.current);
       if (personRef2.current) observer.unobserve(personRef2.current);
-      if (heartRef.current) observer.unobserve(heartRef.current);
+      if (connectionRef.current) observer.unobserve(connectionRef.current);
     };
   }, []);
 
@@ -147,9 +227,15 @@ export function AboutUs() {
           </PersonDesc>
         </Person>
         
-        <HeartConnector ref={heartRef} className="heart-connector">
+        <ConnectionContainer ref={connectionRef} className="heart-connector">
+          <RedString>
+            <StringKnot className="left" />
+            <StringKnot className="right" />
+            <StringHeart className="left">❤</StringHeart>
+            <StringHeart className="right">❤</StringHeart>
+          </RedString>
           <HeartIcon>❤</HeartIcon>
-        </HeartConnector>
+        </ConnectionContainer>
         
         <Person ref={personRef2} className="person">
           <PersonImg 
@@ -167,3 +253,5 @@ export function AboutUs() {
     </Section>
   );
 }
+
+export default AboutUs;

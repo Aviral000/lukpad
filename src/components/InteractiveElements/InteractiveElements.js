@@ -177,7 +177,7 @@ const Overlay = styled.div`
 
 export function InteractiveElements() {
   // Relationship start date: April 6, 2025
-  const startDate = new Date(2025, 3, 6); // Month is 0-indexed
+  const startDate = new Date(2023, 2, 6); // Month is 0-indexed
   
   // Countdown state
   const [timeLeft, setTimeLeft] = useState({
