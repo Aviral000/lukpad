@@ -7,6 +7,7 @@ import { Gallery } from './components/Gallery';
 import { Messages } from './components/Messages';
 import { Footer } from './components/Footer';
 import { InteractiveElements } from './components/InteractiveElements';
+import { UpcomingEvents } from './components/UpcomingEvents';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <OurStory />
       <Gallery />
       <Messages />
+      <UpcomingEvents />
       <Footer />
       <InteractiveElements />
     </>
