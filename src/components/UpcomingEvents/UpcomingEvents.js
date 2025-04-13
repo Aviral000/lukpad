@@ -26,12 +26,46 @@ const EventsContainer = styled.div`
   position: relative;
   overflow: hidden;
   padding: 20px 0;
+  cursor: grab;
+  
+  &:active {
+    cursor: grabbing;
+  }
 `;
 
 const EventsWrapper = styled.div`
   display: flex;
   transition: transform 0.5s ease;
   gap: 20px;
+  scroll-behavior: smooth;
+`;
+
+const ScrollIndicator = styled.div`
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0.7;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const ScrollIcon = styled.div`
+  display: inline-block;
+  animation: scrollHint 2s infinite;
+  
+  @keyframes scrollHint {
+    0% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    100% { transform: translateX(-3px); }
+  }
 `;
 
 const EventCard = styled.div`
@@ -156,7 +190,6 @@ const HeartIcon = styled.div`
 const NavigationButton = styled.button`
   position: absolute;
   top: 50%;
-  right: 20%;
   transform: translateY(-50%);
   background-color: white;
   border: none;
@@ -228,6 +261,10 @@ export function UpcomingEvents() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [visibleIndex, setVisibleIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollX, setScrollX] = useState(0);
+  
   const containerRef = useRef(null);
   const wrapperRef = useRef(null);
   
@@ -259,7 +296,7 @@ export function UpcomingEvents() {
     },
     {
       id: 4,
-      date: new Date(2025, 12, 22), // September 12, 2025
+      date: new Date(2025, 11, 22), // December 22, 2025
       title: "Avi's Birthday",
       description: "Celebrating another year of life with the one who makes every day special.",
       isSpecial: true
@@ -293,6 +330,30 @@ export function UpcomingEvents() {
     }
   }, [events.length]);
   
+  // Handle wheel events for horizontal scrolling
+  useEffect(() => {
+    const handleWheel = (e) => {
+      if (containerRef.current && e.deltaY !== 0) {
+        e.preventDefault();
+        const direction = e.deltaY > 0 ? 1 : -1;
+        const newPosition = Math.min(Math.max(0, scrollPosition + direction), maxScroll);
+        setScrollPosition(newPosition);
+        setVisibleIndex(newPosition);
+      }
+    };
+    
+    const currentContainer = containerRef.current;
+    if (currentContainer) {
+      currentContainer.addEventListener('wheel', handleWheel, { passive: false });
+    }
+    
+    return () => {
+      if (currentContainer) {
+        currentContainer.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, [scrollPosition, maxScroll]);
+  
   // Update countdowns every second
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -322,6 +383,72 @@ export function UpcomingEvents() {
     
     return () => clearInterval(timer);
   }, [events]);
+  
+  // Mouse/Touch Events for dragging
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+    setScrollX(scrollPosition * 320);
+  };
+  
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - containerRef.current.offsetLeft);
+    setScrollX(scrollPosition * 320);
+  };
+  
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX); // Scroll speed
+    const newScrollX = scrollX - walk;
+    const newPosition = Math.round(newScrollX / 320);
+    
+    if (newPosition >= 0 && newPosition <= maxScroll) {
+      wrapperRef.current.style.transform = `translateX(-${newScrollX}px)`;
+    }
+  };
+  
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    
+    const x = e.touches[0].pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX); // Scroll speed
+    const newScrollX = scrollX - walk;
+    const newPosition = Math.round(newScrollX / 320);
+    
+    if (newPosition >= 0 && newPosition <= maxScroll) {
+      wrapperRef.current.style.transform = `translateX(-${newScrollX}px)`;
+    }
+  };
+  
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    
+    if (!isDragging) return;
+    
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const wrapperRect = wrapperRef.current.getBoundingClientRect();
+    const offset = wrapperRect.left - containerRect.left;
+    
+    // Calculate the nearest card position
+    const newPosition = Math.min(
+      Math.max(0, Math.round(-offset / 320)),
+      maxScroll
+    );
+    
+    setScrollPosition(newPosition);
+    setVisibleIndex(newPosition);
+    wrapperRef.current.style.transform = `translateX(-${newPosition * 320}px)`;
+  };
+  
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleMouseUp();
+    }
+  };
   
   const handleNext = () => {
     if (scrollPosition < maxScroll) {
@@ -354,7 +481,16 @@ export function UpcomingEvents() {
     <EventsSection>
       <SectionTitle>Special Moments Ahead</SectionTitle>
       
-      <EventsContainer ref={containerRef}>
+      <EventsContainer 
+        ref={containerRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleMouseUp}
+      >
         <NavigationButton 
           className="prev" 
           onClick={handlePrev} 
@@ -415,6 +551,10 @@ export function UpcomingEvents() {
         >
           <CustomRightArrow size={20} />
         </NavigationButton>
+        
+        <ScrollIndicator>
+          <ScrollIcon>↔️</ScrollIcon> Scroll or swipe to see more events
+        </ScrollIndicator>
       </EventsContainer>
       
       <Indicator>
@@ -429,3 +569,5 @@ export function UpcomingEvents() {
     </EventsSection>
   );
 }
+
+export default UpcomingEvents;
