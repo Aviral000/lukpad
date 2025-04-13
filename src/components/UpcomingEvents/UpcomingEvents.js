@@ -156,6 +156,7 @@ const HeartIcon = styled.div`
 const NavigationButton = styled.button`
   position: absolute;
   top: 50%;
+  right: 20%;
   transform: translateY(-50%);
   background-color: white;
   border: none;

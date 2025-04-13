@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
+import LoveLetter from '../../Assets/Audio/love-letter-312044.mp3';
 
 const CountdownContainer = styled.div`
   position: fixed;
@@ -226,7 +227,8 @@ export function InteractiveElements() {
   
   useEffect(() => {
     // Create audio element
-    audioRef.current = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    // audioRef.current = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    audioRef.current = new Audio(LoveLetter);
     audioRef.current.loop = true;
     
     return () => {
