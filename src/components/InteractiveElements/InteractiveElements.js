@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
 import LoveLetter from '../../Assets/Audio/love-letter-312044.mp3';
+import { LoveDiary } from '../LoveDiary';
 
 const CountdownContainer = styled.div`
   position: fixed;
@@ -439,11 +440,12 @@ export function InteractiveElements() {
         )}
       </CountdownContainer>
       
-      <LoveButton onClick={sendLoveMessage}>💌 Send Love</LoveButton>
+      {/* <LoveButton onClick={sendLoveMessage}>💌 Send Love</LoveButton>
       <LoveMessageBox show={showMessage}>
         {currentMessage}
         {!isTyping && showMessage && <Heart> ❤</Heart>}
-      </LoveMessageBox>
+      </LoveMessageBox> */}
+      <LoveDiary />
       
       <MusicPlayer playing={isPlaying} onClick={toggleMusic}>
         <MusicIcon>♫</MusicIcon>
