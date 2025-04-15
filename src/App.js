@@ -8,11 +8,13 @@ import { Messages } from './components/Messages';
 import { Footer } from './components/Footer';
 import { InteractiveElements } from './components/InteractiveElements';
 import { UpcomingEvents } from './components/UpcomingEvents';
+import { BirthdayVow } from './components/BirthdayVow';
 
 function App() {
   return (
     <>
       <GlobalStyles />
+      <BirthdayVow />
       <Hero />
       <AboutUs />
       <OurStory />
