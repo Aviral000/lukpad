@@ -257,39 +257,39 @@ export function UpcomingEvents() {
   const events = useMemo(() => [
     {
       id: 1,
-      date: new Date(2025, 3, 16), // April 16, 2025 (0-indexed month)
-      title: "Cyra's Birthday",
-      description: "Celebrating the birthday of the most wonderful woman in my life. Happy Birthday, Cyra Camille!",
-      isSpecial: true
-    },
-    {
-      id: 2,
       date: new Date(2025, 4, 6), // May 6, 2025
       title: "1 Month Anniversary",
       description: "Celebrating our first month together. One month of love, joy, and beautiful memories.",
       isSpecial: false
     },
     {
-      id: 3,
+      id: 2,
       date: new Date(2025, 7, 6), // August 6, 2025
       title: "4 Month Anniversary",
       description: "Four amazing months of being in love. Every day with you is a blessing.",
       isSpecial: false
     },
     {
-      id: 4,
+      id: 3,
       date: new Date(2025, 11, 22), // December 22, 2025
       title: "Avi's Birthday",
       description: "Celebrating another year of life with the one who makes every day special.",
       isSpecial: true
     },
     {
-      id: 5,
+      id: 4,
       date: new Date(2026, 3, 6), // April 6, 2026
       title: "1 Year Anniversary",
       description: "Celebrating one year of love, laughter, and creating beautiful memories together.",
       isSpecial: true
-    }
+    },
+    {
+      id: 5,
+      date: new Date(2026, 3, 16), // April 16, 2025 (0-indexed month)
+      title: "Cyra's Birthday",
+      description: "Celebrating the birthday of the most wonderful woman in my life. Happy Birthday, Cyra Camille!",
+      isSpecial: true
+    },
   ], []);
   
   // Scroll to next or previous card
