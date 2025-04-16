@@ -28,7 +28,7 @@ const flyIn = keyframes`
 
 const BirthdaySurpriseContainer = styled.div`
   position: fixed;
-  bottom: 90px;
+  bottom: 30px;
   right: 30px;
   z-index: 1000;
   cursor: pointer;
@@ -112,16 +112,57 @@ const VowContainer = styled.div`
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s ease;
+  padding: 20px;
+  overflow-y: auto;
   
   &.active {
     opacity: 1;
     pointer-events: all;
   }
+  
+  @media (max-width: 768px) {
+    align-items: flex-start;
+    padding: 15px;
+  }
+`;
+
+const VowCardWrapper = styled.div`
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ff6b6b #f5f5f5;
+  
+  /* For Chrome/Safari/Edge */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #ff6b6b;
+    border-radius: 10px;
+  }
+  
+  @media (max-height: 700px) {
+    max-height: 85vh;
+  }
+  
+  @media (max-width: 768px) {
+    width: 95%;
+    margin-top: 20px;
+    max-height: 80vh;
+  }
 `;
 
 const VowCard = styled.div`
-  width: 90%;
-  max-width: 600px;
   background: url('https://i.pinimg.com/originals/74/b6/f9/74b6f956d73c51929b8447c82f55a3df.jpg') no-repeat center center;
   background-size: cover;
   border-radius: 15px;
@@ -141,6 +182,14 @@ const VowCard = styled.div`
     border-radius: 15px;
     z-index: -1;
   }
+  
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 15px 12px;
+  }
 `;
 
 const BirthdayTitle = styled.h2`
@@ -150,6 +199,16 @@ const BirthdayTitle = styled.h2`
   font-size: 2.5rem;
   margin-bottom: 20px;
   animation: ${fadeIn} 1s ease 0.3s both;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
 `;
 
 const VowText = styled.p`
@@ -160,6 +219,17 @@ const VowText = styled.p`
   text-align: center;
   margin-bottom: 20px;
   animation: ${fadeIn} 1s ease 0.6s both;
+  white-space: pre-line; /* Preserves line breaks in the text */
+  
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
 `;
 
 const HeartIcon = styled.div`
@@ -168,6 +238,16 @@ const HeartIcon = styled.div`
   text-align: center;
   margin: 20px 0;
   animation: ${heartBeat} 2s infinite;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin: 15px 0;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2rem;
+    margin: 10px 0;
+  }
 `;
 
 const FlowerDecoration = styled.div`
@@ -200,6 +280,10 @@ const FlowerDecoration = styled.div`
     right: 10px;
     animation-delay: 1.4s;
   }
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -218,6 +302,11 @@ const CloseButton = styled.button`
     color: #ff6b6b;
     transform: scale(1.2);
   }
+  
+  @media (max-width: 480px) {
+    top: 10px;
+    right: 10px;
+  }
 `;
 
 const Signature = styled.p`
@@ -227,9 +316,19 @@ const Signature = styled.p`
   text-align: right;
   margin-top: 20px;
   animation: ${fadeIn} 1s ease 0.9s both;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-top: 15px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
 `;
 
-export function BirthdayVow() {
+export const BirthdayVow = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showVow, setShowVow] = useState(false);
   const [countdown, setCountdown] = useState('');
@@ -237,25 +336,37 @@ export function BirthdayVow() {
   // Your birthday vow/promise text - customize this!
   const birthdayVow = `My dearest Cyra,
 
-On your special day, I want to make these promises to you:
+On your special day — the glorious day the universe gifted me a walking, talking bundle of joy, sass, and peanut addiction — I make these promises to you:
 
-I promise to be your constant supporter, your biggest fan, and your safe haven. 
-I promise to love you more with each passing day, through every timezone and across every mile.
-I promise to hold your dreams as gently as I would hold my own.
-I promise to be patient as we navigate the distance, knowing that someday soon, it will only be a memory.
-I promise to be the reason you smile, even on your hardest days.
-I promise to cherish every moment we share, whether virtually or side by side.
-I promise that no matter how many birthdays we celebrate, I will never stop trying to make each one more special than the last.
+I promise to love you louder than your sneezes and deeper than our future vlogs go viral.
+I swear on all the WiFi signals and long-distance calls — I will always be yours, buffering or not.
+I promise to be your biggest fan, personal photographer, stand-up comedian, and forever teammate in the Couple Olympics.
+I vow to hold your heart with more care than I hold my phone (and that's saying A LOT).
+I promise to never get tired of saying "I love you," even if you make me say it in ten different accents and animal sounds.
+I swear to be the human diary you can always scream into — even if you're mad at me for something I did in your dream.
+I promise to travel any distance — sky, sea, signal loss — just to hear you say, “Babe, I’m hungry.”
+I promise to support your dreams with my whole heart, and if your dream is to eat ice cream for dinner, I’ll join you.
+I swear to never stop teasing you, laughing with you, and secretly recording your weirdest moments for future anniversary content.
+I promise to protect you — from pain, from sadness, and from running out of your favorite snacks.
+I vow to marry you, again and again, every single day — even when we're wrinkly and arguing about what movie to watch.
 
-You are the most precious gift in my life, and I am grateful for another year of loving you.
+Cyra, you are my peace, my storm, my chaos, and my calm. My reason to become better, and my home — no matter where we are on the map.
 
-Happy Birthday, my love. The best is yet to come.`;
+Happy Birthday, my love. One day we’ll look back at all this — the calls, the memes, the plans, the dreams — and smile, because we turned it into a life worth vlogging about.
+
+Now, go eat cake for two. One bite for you, one bite for your future husband who is absolutely, madly, forever in love with you.
+
+The best is yet to come — and it has your name written all over it.
+
+Forever yours, 
+Aviral 💛`;
+
 
   useEffect(() => {
     const checkTime = () => {
       const now = new Date();
       const unlockTime = new Date(now);
-      unlockTime.setHours(21, 30, 0, 0); // 9:30 PM
+      unlockTime.setHours(0, 0, 0, 0); // 9:30 PM
       
       // For testing - uncomment this to make it unlock soon
       // unlockTime.setMinutes(now.getMinutes() + 1);
@@ -300,21 +411,23 @@ Happy Birthday, my love. The best is yet to come.`;
       </BirthdaySurpriseContainer>
       
       <VowContainer className={showVow ? 'active' : ''}>
-        <VowCard>
-          <CloseButton onClick={() => setShowVow(false)}>×</CloseButton>
-          
-          <FlowerDecoration className="top-left">🌸</FlowerDecoration>
-          <FlowerDecoration className="top-right">🌹</FlowerDecoration>
-          <FlowerDecoration className="bottom-left">🌷</FlowerDecoration>
-          <FlowerDecoration className="bottom-right">🌺</FlowerDecoration>
-          
-          <BirthdayTitle>Happy Birthday, Cyra!</BirthdayTitle>
-          <HeartIcon>❤️</HeartIcon>
-          
-          <VowText>{birthdayVow}</VowText>
-          
-          <Signature>With all my love, Avi</Signature>
-        </VowCard>
+        <VowCardWrapper>
+          <VowCard>
+            <CloseButton onClick={() => setShowVow(false)}>×</CloseButton>
+            
+            <FlowerDecoration className="top-left">🌸</FlowerDecoration>
+            <FlowerDecoration className="top-right">🌹</FlowerDecoration>
+            <FlowerDecoration className="bottom-left">🌷</FlowerDecoration>
+            <FlowerDecoration className="bottom-right">🌺</FlowerDecoration>
+            
+            <BirthdayTitle>Happy Birthday, Cyra!</BirthdayTitle>
+            <HeartIcon>❤️</HeartIcon>
+            
+            <VowText>{birthdayVow}</VowText>
+            
+            <Signature>With all my love, Avi</Signature>
+          </VowCard>
+        </VowCardWrapper>
       </VowContainer>
     </>
   );
