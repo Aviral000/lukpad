@@ -16,7 +16,7 @@ export function HomePage() {
     <>
       <Header />
       <GlobalStyles />
-      <BirthdayVow />
+      {/* <BirthdayVow /> */}
       <Hero />
       <AboutUs />
       <OurStory />
