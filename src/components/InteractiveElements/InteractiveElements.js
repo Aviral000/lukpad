@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
+import Countdown from 'react-countdown';
 import Confetti from 'react-confetti';
 import LoveLetter from '../../Assets/Audio/love-letter-312044.mp3';
 import { LoveDiary } from '../LoveDiary';
@@ -22,49 +23,6 @@ const CountdownContainer = styled.div`
   &:hover {
     transform: scale(1.05);
   }
-`;
-
-const LoveButton = styled.button`
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-  z-index: 10;
-  
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
-
-const LoveMessageBox = styled.div`
-  position: fixed;
-  bottom: 80px;
-  left: 20px;
-  width: 300px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.2rem;
-  display: ${props => props.show ? 'block' : 'none'};
-  z-index: 10;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  transform: ${props => props.show ? 'translateY(0)' : 'translateY(20px)'};
-  opacity: ${props => props.show ? '1' : '0'};
-`;
-
-const Heart = styled.span`
-  color: var(--primary-color);
-  font-size: 1.5rem;
 `;
 
 const MusicPlayer = styled.div`
@@ -177,17 +135,29 @@ const Overlay = styled.div`
   display: ${props => props.show ? 'block' : 'none'};
 `;
 
+// Custom renderer for the countdown component
+const CountdownRenderer = ({ days, hours, minutes, seconds, completed, onComplete }) => {
+  // Only trigger onComplete if it's a genuine completion, not on first render
+  useEffect(() => {
+    if (completed && onComplete) {
+      onComplete();
+    }
+  }, [completed, onComplete]);
+
+  if (completed) {
+    return <span>Happy Anniversary! ❤</span>;
+  } else {
+    return (
+      <span>
+        Next {days > 60 ? 'Month' : 'Month'} Anniversary: {days}d {hours}h {minutes}m {seconds}s ❤
+      </span>
+    );
+  }
+};
+
 export function InteractiveElements() {
   // Relationship start date: April 6, 2025
-  const startDate = new Date(2025, 3, 6); // Month is 0-indexed
-  
-  // Countdown state
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
+  const startDate = useMemo(() => new Date(2025, 3, 6), []); // Month is 0-indexed
   
   // Stats states
   const [totalDays, setTotalDays] = useState(0);
@@ -196,39 +166,24 @@ export function InteractiveElements() {
   
   // Anniversary states
   const [anniversaryType, setAnniversaryType] = useState('month');
-  const [nextAnniversaryDate, setNextAnniversaryDate] = useState(new Date());
-  const [currentMonthCount, setCurrentMonthCount] = useState(0);
+  const [nextAnniversaryDate, setNextAnniversaryDate] = useState(null); // Initialize as null
   
   // Celebration states
   const [showCelebration, setShowCelebration] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   
-  // Love message state
-  const [showMessage, setShowMessage] = useState(false);
-  const [currentMessage, setCurrentMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [messageIndex, setMessageIndex] = useState(0);
-  
   // Music player state
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
-  
-  const loveMessages = [
-    "Every moment with you is a treasure I hold dear to my heart.",
-    "Your love gives me strength to overcome any challenge.",
-    "Distance means nothing when someone means everything.",
-    "In a world full of people, my heart chose you.",
-    "Your smile is my favorite part of any day.",
-    "Loving you is as natural as breathing.",
-    "You're the missing piece of my heart I never knew I needed.",
-    "Meeting you was fate, becoming your boyfriend was a choice, but falling in love with you was beyond my control.",
-    "If I had to choose between breathing and loving you, I would use my last breath to say 'I love you.'",
-    "Every love story is beautiful, but ours is my favorite."
-  ];
+
+  // Flag to track if component has mounted
+  const [isMounted, setIsMounted] = useState(false);
   
   useEffect(() => {
+    // Set isMounted to true once the component has mounted
+    setIsMounted(true);
+    
     // Create audio element
-    // audioRef.current = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     audioRef.current = new Audio(LoveLetter);
     audioRef.current.loop = true;
     
@@ -241,6 +196,9 @@ export function InteractiveElements() {
   }, []);
   
   useEffect(() => {
+    // Only run once the component has mounted
+    if (!isMounted) return;
+    
     // Calculate and update statistics
     const updateRelationshipStats = () => {
       const today = new Date();
@@ -265,9 +223,6 @@ export function InteractiveElements() {
       const years = Math.floor(months / 12);
       setYearsCompleted(years);
       
-      // Current month in the relationship (for next anniversary)
-      setCurrentMonthCount(months);
-      
       // Create next anniversary date
       let nextDate = new Date(startDate);
       
@@ -283,38 +238,25 @@ export function InteractiveElements() {
         setAnniversaryType('month');
       }
       
+      // Ensure next anniversary date is in the future
+      if (nextDate <= today) {
+        // If the calculated date is in the past, move to the next month
+        nextDate.setMonth(nextDate.getMonth() + 1);
+      }
+      
       setNextAnniversaryDate(nextDate);
       return nextDate;
     };
     
-    const anniversaryDate = updateRelationshipStats();
-    
-    const countdownInterval = setInterval(() => {
-      const now = new Date();
-      const diff = anniversaryDate - now;
-      
-      if (diff <= 0) {
-        // Recalculate for the next anniversary
-        updateRelationshipStats();
-        return;
-      }
-      
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      
-      setTimeLeft({ days, hours, minutes, seconds });
-    }, 1000);
+    updateRelationshipStats();
     
     // Update stats every day
     const statsInterval = setInterval(updateRelationshipStats, 86400000); // 24 hours
     
     return () => {
-      clearInterval(countdownInterval);
       clearInterval(statsInterval);
     };
-  }, [startDate]);
+  }, [startDate, isMounted]);
   
   const toggleMusic = () => {
     if (isPlaying) {
@@ -323,33 +265,6 @@ export function InteractiveElements() {
       audioRef.current.play();
     }
     setIsPlaying(!isPlaying);
-  };
-  
-  const sendLoveMessage = () => {
-    if (isTyping) return;
-    
-    setShowMessage(true);
-    setCurrentMessage('');
-    setIsTyping(true);
-    
-    const message = loveMessages[messageIndex];
-    setMessageIndex((messageIndex + 1) % loveMessages.length);
-    
-    let i = 0;
-    const typeInterval = setInterval(() => {
-      if (i < message.length) {
-        setCurrentMessage(prev => prev + message.charAt(i));
-        i++;
-      } else {
-        clearInterval(typeInterval);
-        setIsTyping(false);
-        
-        // Hide message after some time
-        setTimeout(() => {
-          setShowMessage(false);
-        }, 5000);
-      }
-    }, 50);
   };
   
   const triggerCelebration = () => {
@@ -366,7 +281,22 @@ export function InteractiveElements() {
     setShowCelebration(false);
   };
   
-  // Calculate celebration message
+  const handleCountdownComplete = () => {
+    // Trigger celebration when countdown reaches zero
+    triggerCelebration();
+    
+    // Update stats and calculate next anniversary
+    const today = new Date();
+    
+    // Calculate next anniversary date
+    let nextDate = new Date(startDate);
+    let months = (today.getFullYear() - startDate.getFullYear()) * 12;
+    months += today.getMonth() - startDate.getMonth() + 1;
+    
+    nextDate.setMonth(startDate.getMonth() + months);
+    setNextAnniversaryDate(nextDate);
+  };
+  
   // Calculate celebration message based on current timeline
   const getCelebrationMessage = () => {
     // If we haven't reached one month yet
@@ -388,6 +318,11 @@ export function InteractiveElements() {
       return `We've been on this wonderful journey together since April 6, 2025. ${totalDays} days of love and counting! 🎉`;
     }
   };
+  
+  // Don't render anything if nextAnniversaryDate hasn't been set yet
+  if (!nextAnniversaryDate) {
+    return null;
+  }
   
   return (
     <>
@@ -433,18 +368,12 @@ export function InteractiveElements() {
       </CelebrationModal>
       
       <CountdownContainer onClick={triggerCelebration}>
-        {timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0 ? (
-          <>Happy Anniversary! ❤</>
-        ) : (
-          <>Next {anniversaryType === 'year' ? 'Year' : 'Month'} Anniversary: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s ❤</>
-        )}
+        <Countdown 
+          date={nextAnniversaryDate}
+          renderer={(props) => <CountdownRenderer {...props} onComplete={handleCountdownComplete} />}
+        />
       </CountdownContainer>
-      
-      {/* <LoveButton onClick={sendLoveMessage}>💌 Send Love</LoveButton>
-      <LoveMessageBox show={showMessage}>
-        {currentMessage}
-        {!isTyping && showMessage && <Heart> ❤</Heart>}
-      </LoveMessageBox> */}
+
       <LoveDiary />
       
       <MusicPlayer playing={isPlaying} onClick={toggleMusic}>
@@ -453,5 +382,3 @@ export function InteractiveElements() {
     </>
   );
 }
-
-export default InteractiveElements;

@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useMemo } from 'react';
 import styled from 'styled-components';
+import Countdown from 'react-countdown';
 import { CustomLeftArrow } from '../../Assets/SVGComponent/LeftArrow';
 import { CustomRightArrow } from '../../Assets/SVGComponent/RightArrow';
 
@@ -22,22 +23,19 @@ const SectionTitle = styled.h2`
   }
 `;
 
-// This is the key change - using native scrolling instead of transform
 const EventsContainer = styled.div`
   position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 20px 0;
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   
-  /* Hide scrollbar for Chrome/Safari/Opera */
   &::-webkit-scrollbar {
     display: none;
   }
   
-  /* Add padding to allow seeing the first and last cards fully */
   &::before,
   &::after {
     content: '';
@@ -228,13 +226,35 @@ const ScrollIndicator = styled.div`
   opacity: 0.7;
 `;
 
+// Renderer for the countdown component
+const CountdownRenderer = ({ days, hours, minutes, seconds, isSpecial }) => {
+  return (
+    <CountdownContainer>
+      <CountdownItem>
+        <CountdownNumber isSpecial={isSpecial}>{days}</CountdownNumber>
+        <CountdownLabel>Days</CountdownLabel>
+      </CountdownItem>
+      <CountdownItem>
+        <CountdownNumber isSpecial={isSpecial}>{hours}</CountdownNumber>
+        <CountdownLabel>Hours</CountdownLabel>
+      </CountdownItem>
+      <CountdownItem>
+        <CountdownNumber isSpecial={isSpecial}>{minutes}</CountdownNumber>
+        <CountdownLabel>Mins</CountdownLabel>
+      </CountdownItem>
+      <CountdownItem>
+        <CountdownNumber isSpecial={isSpecial}>{seconds}</CountdownNumber>
+        <CountdownLabel>Secs</CountdownLabel>
+      </CountdownItem>
+    </CountdownContainer>
+  );
+};
+
 export function UpcomingEvents() {
   const containerRef = useRef(null);
-  // Countdown states
-  const [countdowns, setCountdowns] = useState({});
   
-  // Example events - you can replace these with your actual events
-  const events = [
+  // Example events - using useMemo to prevent recreation on every render
+  const events = useMemo(() => [
     {
       id: 1,
       date: new Date(2025, 3, 16), // April 16, 2025 (0-indexed month)
@@ -270,37 +290,7 @@ export function UpcomingEvents() {
       description: "Celebrating one year of love, laughter, and creating beautiful memories together.",
       isSpecial: true
     }
-  ];
-  
-  // Update countdowns every second
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date();
-      const newCountdowns = {};
-      
-      events.forEach(event => {
-        const difference = event.date - now;
-        
-        if (difference > 0) {
-          const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-          
-          newCountdowns[event.id] = { days, hours, minutes, seconds };
-        } else {
-          newCountdowns[event.id] = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-        }
-      });
-      
-      setCountdowns(newCountdowns);
-    };
-    
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-    
-    return () => clearInterval(timer);
-  }, [events]);
+  ], []);
   
   // Scroll to next or previous card
   const handleNext = () => {
@@ -339,7 +329,6 @@ export function UpcomingEvents() {
         <EventsWrapper>
           {events.map((event) => {
             const formattedDate = formatDate(event.date);
-            const countdown = countdowns[event.id] || { days: 0, hours: 0, minutes: 0, seconds: 0 };
             
             return (
               <EventCard key={event.id}>
@@ -353,24 +342,12 @@ export function UpcomingEvents() {
                   <EventDescription>{event.description}</EventDescription>
                 </div>
                 
-                <CountdownContainer>
-                  <CountdownItem>
-                    <CountdownNumber isSpecial={event.isSpecial}>{countdown.days}</CountdownNumber>
-                    <CountdownLabel>Days</CountdownLabel>
-                  </CountdownItem>
-                  <CountdownItem>
-                    <CountdownNumber isSpecial={event.isSpecial}>{countdown.hours}</CountdownNumber>
-                    <CountdownLabel>Hours</CountdownLabel>
-                  </CountdownItem>
-                  <CountdownItem>
-                    <CountdownNumber isSpecial={event.isSpecial}>{countdown.minutes}</CountdownNumber>
-                    <CountdownLabel>Mins</CountdownLabel>
-                  </CountdownItem>
-                  <CountdownItem>
-                    <CountdownNumber isSpecial={event.isSpecial}>{countdown.seconds}</CountdownNumber>
-                    <CountdownLabel>Secs</CountdownLabel>
-                  </CountdownItem>
-                </CountdownContainer>
+                <Countdown 
+                  date={event.date}
+                  renderer={(props) => 
+                    <CountdownRenderer {...props} isSpecial={event.isSpecial} />
+                  }
+                />
               </EventCard>
             );
           })}

@@ -1,29 +1,16 @@
 import React from 'react';
-import GlobalStyles from './utils/GlobalStyles';
-import { Hero } from './components/Hero';
-import { AboutUs } from './components/AboutUs';
-import { OurStory } from './components/OurStory';
-import { Gallery } from './components/Gallery';
-import { Messages } from './components/Messages';
-import { Footer } from './components/Footer';
-import { InteractiveElements } from './components/InteractiveElements';
-import { UpcomingEvents } from './components/UpcomingEvents';
-import { BirthdayVow } from './components/BirthdayVow';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { HomePage } from './pages';
 
 function App() {
   return (
-    <>
-      <GlobalStyles />
-      <BirthdayVow />
-      <Hero />
-      <AboutUs />
-      <OurStory />
-      <Gallery />
-      <Messages />
-      <UpcomingEvents />
-      <Footer />
-      <InteractiveElements />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/gallery" element={<div>About Page</div>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
