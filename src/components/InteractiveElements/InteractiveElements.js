@@ -27,7 +27,7 @@ const CountdownContainer = styled.div`
 
 const MusicPlayer = styled.div`
   position: fixed;
-  top: 20px;
+  top: 100px;
   right: 20px;
   background-color: ${props => props.playing ? 'rgba(255, 107, 107, 0.9)' : 'rgba(255, 255, 255, 0.9)'};
   padding: 10px;
