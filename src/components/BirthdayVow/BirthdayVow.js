@@ -336,7 +336,7 @@ export const BirthdayVow = () => {
   // Your birthday vow/promise text - customize this!
   const birthdayVow = `My dearest Cyra,
 
-On your special day — the glorious day the universe gifted me a walking, talking bundle of joy, sass, and peanut addiction — I make these promises to you:
+On your special day — the glorious day the universe gifted me a walking, talking bundle of joy, sass, and my addiction — I make these promises to you:
 
 I promise to love you louder than your sneezes and deeper than our future vlogs go viral.
 I swear on all the WiFi signals and long-distance calls — I will always be yours, buffering or not.
