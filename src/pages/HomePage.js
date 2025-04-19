@@ -11,6 +11,7 @@ import { UpcomingEvents } from '../components/UpcomingEvents';
 import { Footer } from '../components/Footer';
 import { InteractiveElements } from '../components/InteractiveElements';
 import { LifeScroller } from '../components/LifeScroller';
+// import { EarthFlightPath } from '../components/EarthFlightPath';
 // import { ThreeDElement } from '../components/ThreeDElement';
 
 export function HomePage() {
@@ -22,6 +23,7 @@ export function HomePage() {
       <Hero />
       {/* <ThreeDElement /> */}
       <AboutUs />
+      {/* <EarthFlightPath /> */}
       <LifeScroller />
       <OurStory />
       <Gallery />
