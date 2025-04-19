@@ -271,6 +271,8 @@ export const Header = () => {
       
       {/* Desktop Navigation */}
       <NavLinks>
+        <StyledLink to="/">Home</StyledLink>
+
         <StyledLink to="/gallery">Gallery</StyledLink>
         
         <DisabledLink>
