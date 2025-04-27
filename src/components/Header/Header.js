@@ -118,7 +118,7 @@ const DisabledLink = styled.div`
 const ComingSoonTag = styled.span`
   position: absolute;
   top: -8px;
-  right: -40px;
+  right: 0px;
   background-color: #ff3636;
   color: white;
   font-size: 0.6rem;
