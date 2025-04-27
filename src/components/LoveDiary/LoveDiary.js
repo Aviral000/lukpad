@@ -288,57 +288,134 @@ export function LoveDiary() {
     {
       date: "April 6, 2025",
       content: `Dear Diary,
-
-Today marks the beginning of the most beautiful chapter of my life. I asked Cyra to be my girlfriend, and she said yes! My heart is overflowing with joy and gratitude.
-
-From the first moment we connected, I knew there was something special about her. Her smile, her kindness, the way she listens and understands me - everything about her captivates me.
-
-Though we're separated by oceans and continents, I've never felt closer to anyone. It's incredible how someone so far away can feel so close to my heart.
-
-I promise to cherish her, to make her feel loved every single day, and to work towards building a future where distance is just a memory.
-
-This is just the beginning of our story, and I can't wait to fill these pages with our journey together.
-
-With a heart full of love,
-Avi`
+  
+  Today marks the beginning of the most beautiful chapter of my life. I asked Cyra to be my girlfriend, and she said yes! My heart is overflowing with joy and gratitude.
+  
+  From the first moment we connected, I knew there was something special about her. Her smile, her kindness, the way she listens and understands me - everything about her captivates me.
+  
+  Though we're separated by oceans and continents, I've never felt closer to anyone. It's incredible how someone so far away can feel so close to my heart.
+  
+  I promise to cherish her, to make her feel loved every single day, and to work towards building a future where distance is just a memory.
+  
+  This is just the beginning of our story, and I can't wait to fill these pages with our journey together.
+  
+  With a heart full of love,
+  Avi`
     },
     {
       date: "April 10, 2025",
       content: `Dear Diary,
-
-Four days into our relationship, and I find myself falling deeper in love with Cyra. Every morning begins with her messages, and every night ends with her voice. The time difference between India and the Philippines doesn't matter when your hearts beat as one.
-
-Today, we had our first "virtual date." We cooked the same meal together over video call—a fusion of Indian and Filipino cuisine. Her laugh when I nearly burned the rice was the most beautiful sound I've ever heard.
-
-We're already making plans. Dreams of meeting in person, traveling together, and someday, building a life where we wake up next to each other every morning.
-
-Distance is teaching us patience and appreciation. Every moment we share becomes precious, every conversation a treasure.
-
-With love that grows stronger each day,
-Avi`
+  
+  Four days into our relationship, and I find myself falling deeper in love with Cyra. Every morning begins with her messages, and every night ends with her voice. The time difference between India and the Philippines doesn't matter when your hearts beat as one.
+  
+  Today, we had our first "virtual date." We cooked the same meal together over video call—a fusion of Indian and Filipino cuisine. Her laugh when I nearly burned the rice was the most beautiful sound I've ever heard.
+  
+  We're already making plans. Dreams of meeting in person, traveling together, and someday, building a life where we wake up next to each other every morning.
+  
+  Distance is teaching us patience and appreciation. Every moment we share becomes precious, every conversation a treasure.
+  
+  With love that grows stronger each day,
+  Avi`
     },
     {
       date: "April 14, 2025",
       content: `Dear Diary,
-
-Today marks another beautiful day in my journey with Cyra. Every morning, I wake up with her on my mind, and every night, I fall asleep with her in my heart. The distance between us may be great, but our love bridges any gap.
-
-I find myself smiling at random moments throughout the day, remembering her laugh, her voice, the way she looks at me. It's incredible how someone so far away can feel so close.
-
-We shared our dreams today—the places we want to visit together, the life we want to build. From the beaches of the Philippines to the mountains of India, we've mapped out our adventures. Someday soon, these dreams will become memories we create together.
-
-What amazes me most is how perfectly we complement each other. When I'm feeling down, she knows exactly what to say to lift my spirits. When I'm excited, she celebrates with me wholeheartedly. We've found a rare harmony that most people spend lifetimes searching for.
-
-The countdown until we're together keeps me going. Each passing day brings us one step closer to holding each other, to turning our virtual connection into a physical reality.
-
-Until then, I'll cherish every call, every message, every moment we share across the distance. My love for her grows stronger with each passing day.
-
-Cyra Camille—the most beautiful name, belonging to the most beautiful soul. I am endlessly grateful that fate brought us together.
-
-With all my love,
-Avi`
+  
+  Today marks another beautiful day in my journey with Cyra. Every morning, I wake up with her on my mind, and every night, I fall asleep with her in my heart. The distance between us may be great, but our love bridges any gap.
+  
+  I find myself smiling at random moments throughout the day, remembering her laugh, her voice, the way she looks at me. It's incredible how someone so far away can feel so close.
+  
+  We shared our dreams today—the places we want to visit together, the life we want to build. From the beaches of the Philippines to the mountains of India, we've mapped out our adventures. Someday soon, these dreams will become memories we create together.
+  
+  What amazes me most is how perfectly we complement each other. When I'm feeling down, she knows exactly what to say to lift my spirits. When I'm excited, she celebrates with me wholeheartedly. We've found a rare harmony that most people spend lifetimes searching for.
+  
+  The countdown until we're together keeps me going. Each passing day brings us one step closer to holding each other, to turning our virtual connection into a physical reality.
+  
+  Until then, I'll cherish every call, every message, every moment we share across the distance. My love for her grows stronger with each passing day.
+  
+  Cyra Camille—the most beautiful name, belonging to the most beautiful soul. I am endlessly grateful that fate brought us together.
+  
+  With all my love,
+  Avi`
+    },
+    {
+      date: "April 24, 2025",
+      content: `Dear Diary,
+  
+  My sweetest Cyra,
+  
+  I seriously can’t believe that in just 11 days… it'll be one whole month since you officially became mine — and somehow, even now, every time I think about it, I feel that same excitement I had when you first messaged me, asking why I looked heartbroken. I swear, you had no idea what kind of love story you were about to walk into. Or maybe you did — because you're magic like that. ✨
+  
+  This one month… has felt like a lifetime and a second, all at once. Every good morning text, every silly joke, every random “are you eating?” moment — they’ve become little rituals that my heart has fallen in love with. Even your sleepy voice on call feels like home now.
+  
+  And I know we haven’t even met in person yet, but isn’t it crazy how you already feel like the most familiar part of me? I’m here in India… you're over there in the Philippines… and yet somehow, you live rent-free in my heart and mind 24/7. 🫠
+  
+  I love how your laugh makes me feel like everything’s okay. I love how you care so deeply, even when you pretend you don’t. I love how strong and soft you are at the same time. I love how, even when we fight or tease each other, we come back stronger. And I love how even your silence speaks to me.
+  
+  Cyra, I don’t know what I did right to find you — but I do know this: you’re the reason I now look forward to every tomorrow.
+  
+  When we hit that 1-month mark… I’ll be celebrating way more than just a date. I’ll be celebrating the little universe we’ve built. The one where an Indian boy and a Filipino girl beat the odds and found love between pixels and timezones.
+  
+  So, here’s me — 11 days early — just reminding you that no matter what life throws at us… I’ll always choose us. I’ll wait, I’ll grow, I’ll love, and I’ll be the man you deserve.
+  
+  You’re not just my girlfriend, Cyra. You’re my favorite notification, my daily smile, my peace, my peanut baby, and my everything.
+  
+  I love you. With every bit of me.
+  
+  Here’s to us… and to all the months, years, and lifetimes to come. 🫶
+  
+  Yours — fully, stupidly, and forever,
+  Avi 💛`
+    },
+    {
+      date: "April 26, 2025",
+      content: `Dear Diary,
+  
+  Hey my dearest Cyra,
+  
+  I can't believe it, but it's happening... in just 9 days, 6 hours, and a few magical minutes, it'll be our very first month together.
+  One whole month since destiny, luck, and maybe a little bit of Cupid’s overtime job brought us together. 🏹❤️
+  
+  And honestly, it still feels like a dream — because somehow, out of billions of people in this world, I found you.
+  Not just a girl. Not just a girlfriend.
+  But my person. My favorite hello. My sweetest "how are you?" My silliest laugh. My warmest good night.
+  And even though we’re miles apart right now, you’re always with me — in my heart, in my thoughts, in everything beautiful around me. 🌎
+  
+  Cyra, you’re the girl who turned my boring, normal days into something worth waiting for.
+  The one who made late-night calls feel like little adventures.
+  The one who made even “good morning” texts feel like getting a gift every single day.
+  The one who makes me smile like an idiot when I look at my phone.
+  And yes, the one who’s going to make me grow abs from laughing so much at our random jokes. 😆
+  
+  I swear, every single moment with you feels like a page from a book I never want to finish.
+  Even when you tease me. Even when you act cute and pretend you’re not.
+  Even when you get shy and cover your face with your hands (yes, I notice everything, my love 😚).
+  
+  You make my heart so full, Cyra.
+  And it’s crazy to think… this is just the beginning. Imagine how much more love I have stored for you...
+  I'm literally planning to love you until we're two little cute grandmas and grandpas bickering over who stole the last cookie. 🍪👵🏻👴🏻
+  
+  I’m so thankful for you.
+  Thankful for your soft heart, your beautiful soul, your adorable stubbornness, and your laugh that feels like the best music I’ve ever heard.
+  
+  And I promise you this —
+  When the clock strikes our 1-month anniversary,
+  I’ll be right here, loving you louder than ever,
+  smiling like a complete fool,
+  and feeling like the luckiest man alive.
+  Because I am.
+  Because you chose me.
+  
+  I love you, my peanut butter, my sunshine, my everything. ☀️🥜
+  
+  Let's make this love story so legendary that even the stars in the sky will want to write fan letters to us. 🌌💌
+  
+  Counting every second until I can celebrate you, my Cyra. 🫶
+  
+  Always yours, forever and beyond,
+  Avi 💛`
     }
-  ];
+  ];  
   
   const handleOpenBook = () => {
     setShowBook(true);

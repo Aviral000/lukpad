@@ -271,7 +271,9 @@ export const Header = () => {
       <NavLinks>
         <StyledLink to="/">Home</StyledLink>
 
-        <StyledLink to="/gallery">Gallery</StyledLink>
+        <StyledLink to="/love-countdown">Countdown</StyledLink>
+
+        {/* <StyledLink to="/gallery">Gallery</StyledLink> */}
 
         <DisabledLink>
           Future Plans
@@ -306,9 +308,13 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       <MobileMenu open={isOpen}>
-        <MobileNavLink to="/gallery" onClick={() => setIsOpen(false)}>
-          Gallery
+        <MobileNavLink to="/love-countdown" onClick={() => setIsOpen(false)}>
+          Countdown
         </MobileNavLink>
+
+        {/* <MobileNavLink to="/gallery" onClick={() => setIsOpen(false)}>
+          Gallery
+        </MobileNavLink> */}
 
         <MobileDisabledLink>
           Future Plans
