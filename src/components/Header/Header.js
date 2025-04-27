@@ -46,10 +46,16 @@ const Logo = styled.div`
 const NavLinks = styled.nav`
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 20px; /* Reduced from 25px to save horizontal space */
+  flex-wrap: wrap; /* Allow wrapping if needed */
+  margin-right: 10px; /* Add some margin on the right */
 
   @media (max-width: 768px) {
     display: none; /* Hide on mobile */
+  }
+  
+  @media (min-width: 769px) and (max-width: 1100px) {
+    gap: 15px; /* Even smaller gap for medium sized screens */
   }
 `;
 
@@ -59,6 +65,7 @@ const StyledLink = styled(Link)`
   font-size: 1.3rem;
   position: relative;
   transition: all 0.3s ease;
+  white-space: nowrap; /* Prevent text wrapping within links */
 
   &:hover {
     color: #ffe6e6;
@@ -81,6 +88,10 @@ const StyledLink = styled(Link)`
     transform: scaleX(1);
   }
 
+  @media (min-width: 769px) and (max-width: 1100px) {
+    font-size: 1.2rem; /* Slightly smaller font for medium screens */
+  }
+
   @media (max-width: 768px) {
     font-size: 1.1rem;
   }
@@ -92,7 +103,12 @@ const DisabledLink = styled.div`
   font-size: 1.3rem;
   position: relative;
   cursor: default;
-  margin-right: 8px;
+  white-space: nowrap; /* Prevent text wrapping within links */
+  padding-right: 45px; /* Make room for the SOON tag */
+
+  @media (min-width: 769px) and (max-width: 1100px) {
+    font-size: 1.2rem; /* Slightly smaller font for medium screens */
+  }
 
   @media (max-width: 768px) {
     font-size: 1.1rem;
@@ -275,10 +291,10 @@ export const Header = () => {
 
         {/* <StyledLink to="/gallery">Gallery</StyledLink> */}
 
-        <DisabledLink>
+        {/* <DisabledLink>
           Future Plans
           <ComingSoonTag>SOON</ComingSoonTag>
-        </DisabledLink>
+        </DisabledLink> */}
 
         <DisabledLink>
           Goals
@@ -308,6 +324,10 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       <MobileMenu open={isOpen}>
+        <MobileNavLink to="/" onClick={() => setIsOpen(false)}>
+          Home
+        </MobileNavLink>
+        
         <MobileNavLink to="/love-countdown" onClick={() => setIsOpen(false)}>
           Countdown
         </MobileNavLink>
@@ -316,10 +336,10 @@ export const Header = () => {
           Gallery
         </MobileNavLink> */}
 
-        <MobileDisabledLink>
+        {/* <MobileDisabledLink>
           Future Plans
           <ComingSoonTag>SOON</ComingSoonTag>
-        </MobileDisabledLink>
+        </MobileDisabledLink> */}
 
         <MobileDisabledLink>
           Goals
