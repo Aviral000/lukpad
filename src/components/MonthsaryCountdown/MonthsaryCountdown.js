@@ -382,7 +382,7 @@ export function MonthsaryCountdown() {
     // Day 9 (0 index for April 27)
     {
       days: 9,
-      text: "**Hey my beautiful Cyra,** Only **9 days** left until we celebrate our very first month together! Every single day with you feels like the best part of my life, and I can't wait to celebrate so many months and years more with you. **You are my today, my tomorrow, and every day after that.** 💖 I love you endlessly, my peanut! 🥜✨"
+      text: "**Hey my beautiful Cyra,** Only **9 days** left until we celebrate our very first month together! Every single day with you feels like the best part of my life, and I can't wait to celebrate so many months and years more with you. **You are my today, my tomorrow, and every day after that.** 💖 I love you endlessly, my sweatheart! 🌸✨"
     },
     // Day 8 (April 28)
     {
@@ -427,7 +427,7 @@ export function MonthsaryCountdown() {
     // Day 0 (May 6)
     {
       days: 0,
-      text: "**Happy 1st Month Anniversary, my Cyra!** 🎉💖 Exactly 30 days ago, I found a love so pure, so crazy, so beautiful, it made my whole life brighter. Thank you for choosing me. Thank you for loving me. **You are my forever person.** This is just the first of millions of months, my love. Let's keep loving, keep laughing, keep growing — together, forever and beyond. 👫✨ **I love you infinity times infinity!** ♾️💛"
+      text: "**Happy 1st Month Anniversary, my Cyra!** 🎉💖 Exactly 30 days ago, I found a love so pure, so crazy, so beautiful, it made my whole life brighter. Thank you for choosing me. Thank you for loving me. **You are my forever person.** This is just the first of millions of months, my love. Let's keep loving, keep laughing, keep growing — together, forever and beyond. 👫✨ **I love you infinity times infinity!** ♾️💛🌸"
     }
   ];
 
