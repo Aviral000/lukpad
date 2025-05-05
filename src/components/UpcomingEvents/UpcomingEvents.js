@@ -539,27 +539,27 @@ export function UpcomingEvents() {
       date: new Date(2025, 4, 6), // May 6, 2025
       title: "1 Month Anniversary",
       description: "Celebrating our first month together. One month of love, joy, and beautiful memories.",
-      isSpecial: false,
+      isSpecial: true,
       detailedSchedule: [
         { 
-          time: "09:00 AM", 
-          title: "Morning Coffee", 
-          description: "Start the day with a special coffee together, reminiscing about our first month." 
+          time: "00:00 AM", 
+          title: "Heartful text and voice messages", 
+          description: "Starting the sleep with sweet messages and love notes. Expressing my love in front of all the people." 
         },
         { 
-          time: "12:00 PM", 
-          title: "Lunch at Our First Date Spot", 
-          description: "Revisit the restaurant where we had our first meal together." 
+          time: "4:00 PM", 
+          title: "A song", 
+          description: "Playing a song for the very first time on the guitar. Expressing my love via song" 
         },
         { 
-          time: "04:00 PM", 
-          title: "Beach Stroll", 
-          description: "Walk along the shore and watch the sunset together." 
+          time: "6:00 PM", 
+          title: "Cake cutting", 
+          description: "Cutting the cake with a special message. Celebrating our love with a sweet treat." 
         },
         { 
-          time: "07:00 PM", 
-          title: "Dinner & Movie", 
-          description: "Romantic dinner followed by our favorite movie at home." 
+          time: "8:00 PM", 
+          title: "A love letter", 
+          description: "Writing a heartfelt letter to express my feelings. A special moment to share my love. Just like every beginnging people make a lot of efforts to impress the girl but for my wife I want to relive all the these moments every single day not just the beginning, but forever types, you feel me naa hehe.... muuuuaahh" 
         }
       ]
     },
