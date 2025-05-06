@@ -565,9 +565,9 @@ export function UpcomingEvents() {
     },
     {
       id: 2,
-      date: new Date(2025, 7, 6), // August 6, 2025
-      title: "4 Month Anniversary",
-      description: "Four amazing months of being in love. Every day with you is a blessing.",
+      date: new Date(2025, 9, 6), // october 6, 2025
+      title: "6 Month Anniversary",
+      description: "Six amazing months of being in love. Every day with you is a blessing.",
       isSpecial: false,
       detailedSchedule: [
         { 
@@ -589,6 +589,30 @@ export function UpcomingEvents() {
     },
     {
       id: 3,
+      date: new Date(2025, 9, 18), // october 18, 2025
+      title: "First Flight to you",
+      description: "First flight to you. Six amazing months of being in love. Every day with you is a blessing.",
+      isSpecial: true,
+      detailedSchedule: [
+        { 
+          time: "10:00 AM", 
+          title: "Breakfast in Bed", 
+          description: "Start the day with a special homemade breakfast." 
+        },
+        { 
+          time: "02:00 PM", 
+          title: "Couples Massage", 
+          description: "Relaxing spa treatment for both of us." 
+        },
+        { 
+          time: "06:00 PM", 
+          title: "Rooftop Dinner", 
+          description: "Exclusive dinner with city views and candlelight." 
+        }
+      ]
+    },
+    {
+      id: 4,
       date: new Date(2025, 11, 22), // December 22, 2025
       title: "Avi's Birthday",
       description: "Celebrating another year of life with the one who makes every day special.",
@@ -622,7 +646,7 @@ export function UpcomingEvents() {
       ]
     },
     {
-      id: 4,
+      id: 5,
       date: new Date(2026, 3, 6), // April 6, 2026
       title: "1 Year Anniversary",
       description: "Celebrating one year of love, laughter, and creating beautiful memories together.",
@@ -661,7 +685,7 @@ export function UpcomingEvents() {
       ]
     },
     {
-      id: 5,
+      id: 6,
       date: new Date(2026, 3, 16), // April 16, 2026
       title: "Cyra's Birthday",
       description: "Celebrating the birthday of the most wonderful woman in my life. Happy Birthday, Cyra Camille!",
