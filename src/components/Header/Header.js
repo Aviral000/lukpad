@@ -97,6 +97,45 @@ const StyledLink = styled(Link)`
   }
 `;
 
+// Create an external link styled component that looks like StyledLink
+const StyledExternalLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  position: relative;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Prevent text wrapping within links */
+
+  &:hover {
+    color: #ffe6e6;
+    transform: scale(1.05);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
+  }
+
+  @media (min-width: 769px) and (max-width: 1100px) {
+    font-size: 1.2rem; /* Slightly smaller font for medium screens */
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+`;
+
 const DisabledLink = styled.div`
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
@@ -217,6 +256,22 @@ const MobileNavLink = styled(Link)`
   }
 `;
 
+// Create a mobile external link component
+const MobileExternalLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin: 15px 0;
+  padding: 5px 0;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #ffe6e6;
+    transform: translateX(5px);
+  }
+`;
+
 const MobileDisabledLink = styled.div`
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
@@ -296,10 +351,9 @@ export const Header = () => {
           <ComingSoonTag>SOON</ComingSoonTag>
         </DisabledLink> */}
 
-        <DisabledLink>
-          Goals
-          <ComingSoonTag>SOON</ComingSoonTag>
-        </DisabledLink>
+        <StyledExternalLink href="/workout" target="_blank" rel="noopener noreferrer">
+          Workout
+        </StyledExternalLink>
 
         <DisabledLink>
           Vlogs
@@ -341,10 +395,9 @@ export const Header = () => {
           <ComingSoonTag>SOON</ComingSoonTag>
         </MobileDisabledLink> */}
 
-        <MobileDisabledLink>
-          Goals
-          <ComingSoonTag>SOON</ComingSoonTag>
-        </MobileDisabledLink>
+        <MobileExternalLink href="/workout" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>
+          Workout
+        </MobileExternalLink>
 
         <MobileDisabledLink>
           Vlogs

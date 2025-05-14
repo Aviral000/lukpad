@@ -595,20 +595,10 @@ export function UpcomingEvents() {
       isSpecial: true,
       detailedSchedule: [
         { 
-          time: "10:00 AM", 
-          title: "Breakfast in Bed", 
-          description: "Start the day with a special homemade breakfast." 
+          time: "00:00 PM", 
+          title: "Next Day", 
+          description: "Heartbeat, nervousness, and excitement. The day I will be flying to you." 
         },
-        { 
-          time: "02:00 PM", 
-          title: "Couples Massage", 
-          description: "Relaxing spa treatment for both of us." 
-        },
-        { 
-          time: "06:00 PM", 
-          title: "Rooftop Dinner", 
-          description: "Exclusive dinner with city views and candlelight." 
-        }
       ]
     },
     {
