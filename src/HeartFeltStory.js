@@ -9,65 +9,76 @@ const HeartfeltStory = () => {
   const storyParts = [
     {
       title: "Once Upon A Time...",
-      content: "In a world where hearts speak louder than words, two souls found each other in the most unexpected way.",
+      content:
+        "In a world where hearts speak louder than words, two souls collided in a way fate couldn’t ignore — and that's when I first felt the magic of you.",
       icon: <Star className="w-8 h-8" />,
       gradient: "from-purple-400 to-pink-400"
     },
     {
       title: "The Meeting",
-      content: "Like stars aligning in the perfect constellation, we discovered a connection that felt written in the stars themselves.",
+      content:
+        "Like stars forming their perfect dance, we found each other in the chaos. It wasn’t planned, but it felt destined, like you were the chapter my heart was waiting to write.",
       icon: <Sparkles className="w-8 h-8" />,
       gradient: "from-blue-400 to-purple-400"
     },
     {
       title: "Growing Closer",
-      content: "Every conversation became a treasure, every smile a gift, every moment together a page in our beautiful story.",
+      content:
+        "Every message from you made my world brighter. I kept falling for your smile, your thoughts, your soul — deeper than I ever expected.",
       icon: <Heart className="w-8 h-8" />,
       gradient: "from-pink-400 to-red-400"
     },
     {
       title: "The Truth",
-      content: "Sometimes the most beautiful stories have the most complicated chapters, and truth has a way of changing everything.",
+      content:
+        "Sometimes, love chooses the most complicated path. I never wanted to be a storm in your sky — only the calm that made you smile again.",
       icon: <Moon className="w-8 h-8" />,
       gradient: "from-indigo-400 to-blue-400"
     },
     {
       title: "Understanding",
-      content: "I never meant to complicate your world. Your happiness means everything to me, even if it means letting go.",
+      content:
+        "I know it's wrong… but if loving you means showing the side of me that fights for you — then let me be that fighter. Because I will and surely will win your heart.",
       icon: <Sun className="w-8 h-8" />,
       gradient: "from-yellow-400 to-orange-400"
     },
     {
       title: "My Heartfelt Apology",
-      content: "I'm sorry for any confusion, any pain, any difficulty I may have brought into your life. That was never my intention.",
+      content:
+        "I'm sorry if I ever made your heart heavy. I never wanted to bring pain — only warmth. If I could take away every confusion, I would replace it with comfort and care.",
       icon: <Heart className="w-8 h-8" />,
       gradient: "from-red-400 to-pink-400"
     },
     {
       title: "What You Mean To Me",
-      content: "You brought sunshine into my cloudy days, laughter into my quiet moments, and hope into my dreams.",
+      content:
+        "You’re more than just someone I like — you’re someone I feel in every heartbeat. You bring color where there was gray, and a melody where there was silence.",
       icon: <Sparkles className="w-8 h-8" />,
       gradient: "from-amber-400 to-yellow-400"
     },
     {
       title: "Respect & Love",
-      content: "True love means wanting someone's happiness above your own. I respect your choices and your relationship.",
+      content:
+        "I don’t love you to possess you. I love you to uplift you, respect you, and protect that beautiful smile. Because loving you isn’t about me — it’s about seeing you happy.",
       icon: <Star className="w-8 h-8" />,
       gradient: "from-green-400 to-blue-400"
     },
     {
       title: "Always In My Heart",
-      content: "Though our paths may lead us different ways, you'll always have a special place in my heart. Thank you for the beautiful memories.",
+      content:
+        "Even if life draws maps we didn’t plan, you’ll always be a glowing dot on mine — circled in love, marked with hope, and carried in every beat of my heart.",
       icon: <Heart className="w-8 h-8" />,
       gradient: "from-purple-400 to-pink-400"
     },
     {
       title: "Until We Meet Again",
-      content: "May your days be filled with love, laughter, and all the happiness you deserve. You are truly special.",
+      content:
+        "Until your eyes find mine again, I’ll keep loving you in silence, cheering for you from afar, and waiting — because I believe in ‘us’, no matter how long it takes.",
       icon: <Sun className="w-8 h-8" />,
       gradient: "from-orange-400 to-red-400"
     }
   ];
+  
 
   useEffect(() => {
     const observerOptions = {
