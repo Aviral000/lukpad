@@ -1,1 +1,0 @@
-export { MonthsaryCountdown } from './MonthsaryCountdown';

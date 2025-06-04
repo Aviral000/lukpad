@@ -1,1 +1,0 @@
-export { LoveDiary } from './LoveDiary';

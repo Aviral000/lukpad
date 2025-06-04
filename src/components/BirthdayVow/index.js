@@ -1,1 +1,0 @@
-export { BirthdayVow } from './BirthdayVow';
