@@ -78,12 +78,19 @@ const HeartfeltStory = () => {
       gradient: "from-orange-400 to-red-400"
     },
     {
-        title: "A Wish From My Heart",
+        title: "A Promise I Still Hold",
         content:
-          "When I first met you, I smiled and said — 'Give me a chance, you’ll never regret it.' I know it sounds wrong, but my heart still whispers… just one secret place in your heart, that's all I ask.\n\nEven if I fail, even if you marry someone someday — I promise, I’ll never cross your peace, never disturb your life. Not until destiny changes… (and hopefully never has to). But until then, I’ll keep this quiet little love safe — just for you.",
+            "When I met you, I softly said — 'Just one chance, and you’ll never regret it.' Maybe I was too late, maybe I was too quiet. But deep down, I still wish for a tiny space in your heart — silently, sweetly, truly.",
         icon: <Heart className="w-8 h-8" />,
-        gradient: "from-rose-400 to-purple-500"
+        gradient: "from-rose-400 to-fuchsia-500"
     },
+    {
+        title: "All My Efforts, Just For You",
+        content:
+            "This time, I’m not holding back. I’ll put every bit of love, every smile, every word into showing you — how deeply I care. Not to chase, but to gently glow in your heart… even if only secretly.",
+        icon: <Sparkles className="w-8 h-8" />,
+        gradient: "from-pink-400 to-red-400"
+    }
   ];
   
 
