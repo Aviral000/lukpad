@@ -76,7 +76,14 @@ const HeartfeltStory = () => {
         "Until your eyes find mine again, I’ll keep loving you in silence, cheering for you from afar, and waiting — because I believe in ‘us’, no matter how long it takes.",
       icon: <Sun className="w-8 h-8" />,
       gradient: "from-orange-400 to-red-400"
-    }
+    },
+    {
+        title: "A Wish From My Heart",
+        content:
+          "When I first met you, I smiled and said — 'Give me a chance, you’ll never regret it.' I know it sounds wrong, but my heart still whispers… just one secret place in your heart, that's all I ask.\n\nEven if I fail, even if you marry someone someday — I promise, I’ll never cross your peace, never disturb your life. Not until destiny changes… (and hopefully never has to). But until then, I’ll keep this quiet little love safe — just for you.",
+        icon: <Heart className="w-8 h-8" />,
+        gradient: "from-rose-400 to-purple-500"
+    },
   ];
   
 
